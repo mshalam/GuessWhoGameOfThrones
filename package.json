@@ -1,0 +1,36 @@
+{
+  "name": "mss619-final-project",
+  "version": "1.0.0",
+  "description": "final-project created for mss619",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyu-csci-ua-0480-002-fall-2015/mss619-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyu-csci-ua-0480-002-fall-2015/mss619-final-project/issues"
+  },
+  "homepage": "https://github.com/nyu-csci-ua-0480-002-fall-2015/mss619-final-project#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
+    "debug": "^2.2.0",
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "express-session": "^1.12.1",
+    "hbs": "^4.0.0",
+    "mongoose": "^4.2.6",
+    "mongoose-url-slugs": "^0.1.4",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^3.1.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0"
+  }
+}
