@@ -1,75 +1,3 @@
-function doubleArr (arr) {
-
-	var doubleArr = [];
-	var dArrIndex = 0;
-	
-	for (var i = 0; i < arr.length; i++)
-	{
-	
-		doubleArr[dArrIndex] = arr[i];
-		dArrIndex ++;
-		doubleArr[dArrIndex] = arr[i];
-		dArrIndex ++;
-	
-	}
-	
-	return doubleArr;
-
-}
-
-function addBoard(symbols)
-{
-	var game = document.getElementById('game');
-	
-	var htmlString = '';
-	
-	for (var i =0; i < symbols.length; i++)
-	{
-		htmlString += '<button class="floating-box">' + symbols[i] + '</button>';
-	}
-	
-	game.innerHTML = htmlString;
-	
-	//BASED on the size of the array change the margin for floating box (to keep grid look)
-	var elems = document.getElementsByClassName("floating-box");
-	
-	console.log(symbols.length);
-	
-	if (symbols.length == 4)
-	{
-		//console.log('hello');
-		for(var i = 0; i < elems.length; i++) {
-    		elems[i].style.margin = '140px';
-		}
-	}
-	
-	
-}
-
-function randomizeCards(oldCards)
-{
-	var randCard = [];
-	var rcIndex = 0;
-	
-	//console.log(oldCards);
-	
-	while (oldCards.length > 0)
-	{
-		console.log(oldCards);
-		
-		var randIndex = Math.floor(Math.random()*oldCards.length);
-		console.log(randIndex);
-		
-		var myNewCard = oldCards[randIndex];
-		oldCards.splice(randIndex, 1);
-		randCard[rcIndex] = myNewCard;
-		rcIndex++;
-	
-	}	
-
-
-	return randCard;
-}
 
 function createCards()
 {
@@ -80,14 +8,14 @@ function createCards()
 	//create the images and their attributes. then add them to the array
 	var aryaImg = new Image();
 	aryaImg.src = "images/arya.png";
-	var cardArya = {name:"arya", image:aryaImg};
+	var cardArya = {name:"arya", image:aryaImg, house:"stark", gender:"f"};
 
 	cards[cardsIndex] = cardArya;
 	cardsIndex++;
 
 	var brienneImg = new Image();
 	brienneImg.src = "images/brienne.png";
-	var cardBrienne = {name:"brienne", image:brienneImg};
+	var cardBrienne = {name:"brienne", image:brienneImg, house:"none", gender:"f"};
 
 	cards[cardsIndex] = cardBrienne;
 	cardsIndex++;
@@ -95,14 +23,14 @@ function createCards()
 	
 	var cersieImg = new Image();
 	cersieImg.src = "images/cersie.png";
-	var cardcersie = {name:"cersie", image:cersieImg};
+	var cardcersie = {name:"cersie", image:cersieImg, house:"lanister", gender:"f"};
 
 	cards[cardsIndex] = cardcersie;
 	cardsIndex++;
 	
 	var jamieImg = new Image();
 	jamieImg.src = "images/jamie.png";
-	var cardjamie = {name:"jamie", image:jamieImg};
+	var cardjamie = {name:"jamie", image:jamieImg, house:"lanister", gender:"m"};
 
 	cards[cardsIndex] = cardjamie;
 	cardsIndex++;
@@ -110,7 +38,7 @@ function createCards()
 	
 	var joffreyImg = new Image();
 	joffreyImg.src = "images/joffrey.png";
-	var cardjoffrey = {name:"joffrey", image:joffreyImg};
+	var cardjoffrey = {name:"joffrey", image:joffreyImg, house:"lanister", gender:"m"};
 
 	cards[cardsIndex] = cardjoffrey;
 	cardsIndex++;
@@ -118,7 +46,7 @@ function createCards()
 	
 	var johnsnowImg = new Image();
 	johnsnowImg.src = "images/johnsnow.png";
-	var cardjohnsnow = {name:"johnsnow", image:johnsnowImg};
+	var cardjohnsnow = {name:"johnsnow", image:johnsnowImg, house:"stark", gender:"m"};
 
 	cards[cardsIndex] = cardjohnsnow;
 	cardsIndex++;
@@ -126,7 +54,7 @@ function createCards()
 	
 	var kalImg = new Image();
 	kalImg.src = "images/kal.png";
-	var cardkal = {name:"kal", image:kalImg};
+	var cardkal = {name:"kal", image:kalImg, house:"none", gender:"m"};
 
 	cards[cardsIndex] = cardkal;
 	cardsIndex++;
@@ -134,7 +62,7 @@ function createCards()
 	
 	var khaleesiImg = new Image();
 	khaleesiImg.src = "images/khaleesi.png";
-	var cardkhaleesi = {name:"khaleesi", image:khaleesiImg};
+	var cardkhaleesi = {name:"khaleesi", image:khaleesiImg, house:"targaryan", gender:"f"};
 
 	cards[cardsIndex] = cardkhaleesi;
 	cardsIndex++;
@@ -142,7 +70,7 @@ function createCards()
 	
 	var margeryImg = new Image();
 	margeryImg.src = "images/margery.png";
-	var cardmargery = {name:"margery", image:margeryImg};
+	var cardmargery = {name:"margery", image:margeryImg, house:"tyrell", gender:"f"};
 
 	cards[cardsIndex] = cardmargery;
 	cardsIndex++;
@@ -150,7 +78,7 @@ function createCards()
 	
 	var robbImg = new Image();
 	robbImg.src = "images/robb.png";
-	var cardrobb = {name:"robb", image:robbImg};
+	var cardrobb = {name:"robb", image:robbImg, house:"stark", gender:"m"};
 
 	cards[cardsIndex] = cardrobb;
 	cardsIndex++;
@@ -158,7 +86,7 @@ function createCards()
 	
 	var tyrionImg = new Image();
 	tyrionImg.src = "images/tyrion.png";
-	var cardtyrion = {name:"tyrion", image:tyrionImg};
+	var cardtyrion = {name:"tyrion", image:tyrionImg, house:"lanister", gender:"m"};
 
 	cards[cardsIndex] = cardtyrion;
 	cardsIndex++;
@@ -224,11 +152,6 @@ function handleClick(event) {
 	//get user cards
 	cardsUser = createCards();
 	
-	/*for(var i = 0; i<cardsUser.length;i++)
-	{
-		console.log("image: " + cardsUser[i].image.src);
-	}	
-	*/
 	//get cpu cards
 	cardsCpu = createCards();
 	
@@ -250,14 +173,33 @@ function guess()
 	console.log('you slected : ' + x);
 }
 
+function guessAppearance()
+{
+	
+	var x = document.getElementById("appearance").value;
+    //document.getElementById("demo").innerHTML = "You selected: " + x;
+	console.log('you slected : ' + x);
+}
 
-
+function guessPerson()
+{
+	
+	var x = document.getElementById("personGuess").value;
+    //document.getElementById("demo").innerHTML = "You selected: " + x;
+	console.log('you slected : ' + x);
+}
 
 var button = document.getElementById('startButton');
 button.addEventListener('click', handleClick);
 
 var guessButton = document.getElementById('guessButton');
 guessButton.addEventListener('click', guess);
+
+var guessButtonAppearance = document.getElementById('guessButtonAppearance');
+guessButtonAppearance.addEventListener('click', guessAppearance);
+
+var guessButtonPerson = document.getElementById('guessButtonPerson');
+guessButtonPerson.addEventListener('click', guessPerson);
 
 
 
