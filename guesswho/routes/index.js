@@ -39,6 +39,7 @@ router.get('/', function(req, res) {
   res.render('index', { user: req.user });
 });
 
+
 router.get('/login', function(req, res) {
   res.render('login');
 });
@@ -61,6 +62,9 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/login', function(req,res,next) {
+
+	//cosole.log("login attempt");
+
   passport.authenticate('local', function(err,user) {
     if(user) {
       req.logIn(user, function(err) {
@@ -78,6 +82,13 @@ router.get('/logout', function(req,res)
 	req.logout();
 	res.redirect('/')
 });
+
+
+
+
+
+
+
 
 module.exports = router;
 
