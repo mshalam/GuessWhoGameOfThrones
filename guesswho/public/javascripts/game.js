@@ -8,14 +8,14 @@ function createCards()
 	//create the images and their attributes. then add them to the array
 	var aryaImg = new Image();
 	aryaImg.src = "images/arya.png";
-	var cardArya = {name:"arya", image:aryaImg, house:"stark", gender:"f"};
+	var cardArya = {name:"arya", image:aryaImg, house:"stark", gender:"f", claim:"n", alive:"y", hair:"brunette"};
 
 	cards[cardsIndex] = cardArya;
 	cardsIndex++;
 
 	var brienneImg = new Image();
 	brienneImg.src = "images/brienne.png";
-	var cardBrienne = {name:"brienne", image:brienneImg, house:"none", gender:"f"};
+	var cardBrienne = {name:"brienne", image:brienneImg, house:"none", gender:"f", claim:"n", alive:"y", hair:"blonde"};
 
 	cards[cardsIndex] = cardBrienne;
 	cardsIndex++;
@@ -23,14 +23,14 @@ function createCards()
 	
 	var cersieImg = new Image();
 	cersieImg.src = "images/cersie.png";
-	var cardcersie = {name:"cersie", image:cersieImg, house:"lanister", gender:"f"};
+	var cardcersie = {name:"cersie", image:cersieImg, house:"lanister", gender:"f", claim:"n", alive:"y", hair:"blonde"};
 
 	cards[cardsIndex] = cardcersie;
 	cardsIndex++;
 	
 	var jamieImg = new Image();
 	jamieImg.src = "images/jamie.png";
-	var cardjamie = {name:"jamie", image:jamieImg, house:"lanister", gender:"m"};
+	var cardjamie = {name:"jamie", image:jamieImg, house:"lanister", gender:"m", claim:"n", alive:"y", hair:"blonde"};
 
 	cards[cardsIndex] = cardjamie;
 	cardsIndex++;
@@ -38,7 +38,7 @@ function createCards()
 	
 	var joffreyImg = new Image();
 	joffreyImg.src = "images/joffrey.png";
-	var cardjoffrey = {name:"joffrey", image:joffreyImg, house:"lanister", gender:"m"};
+	var cardjoffrey = {name:"joffrey", image:joffreyImg, house:"lanister", gender:"m", claim:"y", alive:"n", hair:"blonde"};
 
 	cards[cardsIndex] = cardjoffrey;
 	cardsIndex++;
@@ -46,7 +46,7 @@ function createCards()
 	
 	var johnsnowImg = new Image();
 	johnsnowImg.src = "images/johnsnow.png";
-	var cardjohnsnow = {name:"johnsnow", image:johnsnowImg, house:"stark", gender:"m"};
+	var cardjohnsnow = {name:"johnsnow", image:johnsnowImg, house:"stark", gender:"m", claim:"n", alive:"n", hair:"brunette"};
 
 	cards[cardsIndex] = cardjohnsnow;
 	cardsIndex++;
@@ -54,7 +54,7 @@ function createCards()
 	
 	var kalImg = new Image();
 	kalImg.src = "images/kal.png";
-	var cardkal = {name:"kal", image:kalImg, house:"none", gender:"m"};
+	var cardkal = {name:"kal", image:kalImg, house:"none", gender:"m", claim:"n", alive:"n", hair:"brunette"};
 
 	cards[cardsIndex] = cardkal;
 	cardsIndex++;
@@ -62,7 +62,7 @@ function createCards()
 	
 	var khaleesiImg = new Image();
 	khaleesiImg.src = "images/khaleesi.png";
-	var cardkhaleesi = {name:"khaleesi", image:khaleesiImg, house:"targaryan", gender:"f"};
+	var cardkhaleesi = {name:"khaleesi", image:khaleesiImg, house:"targaryan", gender:"f", claim:"y", alive:"y", hair:"blonde"};
 
 	cards[cardsIndex] = cardkhaleesi;
 	cardsIndex++;
@@ -70,7 +70,7 @@ function createCards()
 	
 	var margeryImg = new Image();
 	margeryImg.src = "images/margery.png";
-	var cardmargery = {name:"margery", image:margeryImg, house:"tyrell", gender:"f"};
+	var cardmargery = {name:"margery", image:margeryImg, house:"tyrell", gender:"f", claim:"n", alive:"y", hair:"brunette"};
 
 	cards[cardsIndex] = cardmargery;
 	cardsIndex++;
@@ -78,7 +78,7 @@ function createCards()
 	
 	var robbImg = new Image();
 	robbImg.src = "images/robb.png";
-	var cardrobb = {name:"robb", image:robbImg, house:"stark", gender:"m"};
+	var cardrobb = {name:"robb", image:robbImg, house:"stark", gender:"m", claim:"y", alive:"n", hair:"brunette"};
 
 	cards[cardsIndex] = cardrobb;
 	cardsIndex++;
@@ -86,7 +86,7 @@ function createCards()
 	
 	var tyrionImg = new Image();
 	tyrionImg.src = "images/tyrion.png";
-	var cardtyrion = {name:"tyrion", image:tyrionImg, house:"lanister", gender:"m"};
+	var cardtyrion = {name:"tyrion", image:tyrionImg, house:"lanister", gender:"m", claim:"n", alive:"y", hair:"blonde"};
 
 	cards[cardsIndex] = cardtyrion;
 	cardsIndex++;
@@ -165,35 +165,674 @@ function handleClick(event) {
 
 }
 
-function guess()
+//handle guesses
+function guessMyth()
 {
 	
-	var x = document.getElementById("houseList").value;
+	var question = document.getElementById("houseList").value;
     //document.getElementById("demo").innerHTML = "You selected: " + x;
-	console.log('you slected : ' + x);
+	console.log('you slected : ' + question);
+	
+	//get the users cards
+	var cards = document.getElementsByClassName("floating-box");
+	
+	console.log(cards[0]);
+	
+	//update the card based on the question
+	//check if its a claim to the throne question
+	if(question == 'claim')
+	{
+		//find out if user person has made a claim to the thrown
+		var upClaim = userPerson.claim;
+		
+		console.log('question: ' + question + ' upHouse: ' + upClaim);
+		
+		//if yes then delete all not alive
+		if(upClaim == 'y')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' != cardsUser[i].claim)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' == cardsUser[i].claim)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	//check if they are alive
+	if(question == 'alive')
+	{
+		//find out if user persons alive
+		var upAlive = userPerson.alive;
+		
+		console.log('question: ' + question + ' upHouse: ' + upAlive);
+		
+		//if yes then delete all not alive
+		if(upAlive == 'y')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' != cardsUser[i].alive)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' == cardsUser[i].alive)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	//otherwise its a house question
+	else
+	{	
+		//find out user persons house
+		var upHouse = userPerson.house;
+		
+		console.log('question: ' + question + ' upHouse: ' + upHouse);
+		
+		//if yes then delete all none this house
+		if(upHouse == question)
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if(question != cardsUser[i].house)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if(question == cardsUser[i].house)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	
+		
+	}
+	
+	
+	//check win
+	
+	//cpu turn
+	cpuTurn();
+	
 }
 
 function guessAppearance()
 {
 	
-	var x = document.getElementById("appearance").value;
+	var question = document.getElementById("appearance").value;
     //document.getElementById("demo").innerHTML = "You selected: " + x;
-	console.log('you slected : ' + x);
+	console.log('you slected : ' + question);
+	
+	//get the users cards
+	var cards = document.getElementsByClassName("floating-box");
+	
+	console.log(cards[0]);
+	
+	//update the card based on the question
+	//check if its a claim to the throne question
+	if(question == 'm')
+	{
+		//find out if user person is male
+		var upGender = userPerson.gender;
+		
+		console.log('question: ' + question + ' upHouse: ' + upGender);
+		
+		//if yes then delete all not alive
+		if(upGender == 'm')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('m' != cardsUser[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('m' == cardsUser[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	else if(question == 'f')
+	{
+		//find out if user person is male
+		var upGender = userPerson.gender;
+		
+		console.log('question: ' + question + ' upHouse: ' + upGender);
+		
+		//if yes then delete all not alive
+		if(upGender == 'f')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('f' != cardsUser[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('f' == cardsUser[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	//hair
+	else if(question == 'blonde')
+	{
+		//find out if user person is male
+		var upHair = userPerson.hair;
+		
+		console.log('question: ' + question + ' upHouse: ' + upHair);
+		
+		//if yes then delete all not alive
+		if(upHair == 'blonde')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('blonde' != cardsUser[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('blonde' == cardsUser[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	else if(question == 'brunette')
+	{
+		//find out if user person is male
+		var upHair = userPerson.hair;
+		
+		console.log('question: ' + question + ' upHouse: ' + upHair);
+		
+		//if yes then delete all not alive
+		if(upHair == 'brunette')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('brunette' != cardsUser[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('brunette' == cardsUser[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	
+	//check win
+	
+	//cpu turn
+	cpuTurn();
 }
 
 function guessPerson()
 {
 	
-	var x = document.getElementById("personGuess").value;
+	var question = document.getElementById("personGuess").value;
     //document.getElementById("demo").innerHTML = "You selected: " + x;
-	console.log('you slected : ' + x);
+	console.log('you slected : ' + question);
+	
+	//get the users cards
+	var cards = document.getElementsByClassName("floating-box");
+	
+	if(userPerson.name == question)
+	{
+		console.log("you win");
+		youWin();
+	}
+	else
+	{
+		for(var i = 0; i < cards.length; i++)
+		{
+			//check the cards value
+			if(question == cardsUser[i].name)
+			{
+				cards[i].style.visibility = "hidden";
+			}
+		}
+	}
+	
+	//check win
+	
+	//cpu turn
+	cpuTurn();
 }
 
-var button = document.getElementById('startButton');
-button.addEventListener('click', handleClick);
+function cpuTurn()
+{
 
-var guessButton = document.getElementById('guessButton');
-guessButton.addEventListener('click', guess);
+	//choose a question 
+	//first get all the question
+	var possibleQs = document.getElementsByTagName("option");
+		
+	//pick a random question
+	var cpuQIndex = Math.floor((Math.random()*possibleQs.length));
+	var cpuQ = possibleQs[cpuQIndex].value;
+	
+	console.log('cpu question: ' + cpuQ);
+
+	
+	//let user know whats going on
+	
+	
+	
+	//change the cpu board based on the question
+	handleCpuGuess(cpuQ);
+	
+	
+	//update the user on what CPU did
+	var displayText = document.getElementById('textForUser');
+	displayText.innerText = "CPU Question: " + possibleQs[cpuQIndex].innerText;
+	
+	
+	//check if CPU Won
+
+}
+
+function handleCpuGuess(question)
+{
+	//get the cpu cards
+	var cards = document.getElementsByClassName("floating-box-cpu");
+
+	if(question == 'm')
+	{
+		//find out if user person is male
+		var upGender = cpuPerson.gender;
+		
+		//console.log('question: ' + question + ' upHouse: ' + upGender);
+		
+		//if yes then delete all not alive
+		if(upGender == 'm')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('m' != cardsCpu[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('m' == cardsCpu[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	else if(question == 'f')
+	{
+		//find out if user person is male
+		var upGender = cpuPerson.gender;
+		
+		console.log('question: ' + question + ' upHouse: ' + upGender);
+		
+		//if yes then delete all not alive
+		if(upGender == 'f')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('f' != cardsCpu[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('f' == cardsCpu[i].gender)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	//hair
+	else if(question == 'blonde')
+	{
+		//find out if user person is male
+		var upHair = cpuPerson.hair;
+		
+		console.log('question: ' + question + ' upHouse: ' + upHair);
+		
+		//if yes then delete all not alive
+		if(upHair == 'blonde')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('blonde' != cardsCpu[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('blonde' == cardsCpu[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	else if(question == 'brunette')
+	{
+		//find out if user person is male
+		var upHair = cpuPerson.hair;
+		
+		//console.log('question: ' + question + ' upHouse: ' + upHair);
+		
+		//if yes then delete all not alive
+		if(upHair == 'brunette')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('brunette' != cardsCpu[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('brunette' == cardsCpu[i].hair)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	
+	else if(question == 'claim')
+	{
+		//find out if user person has made a claim to the thrown
+		var upClaim = cpuPerson.claim;
+		
+		console.log('question: ' + question + ' upHouse: ' + upClaim);
+		
+		//if yes then delete all not alive
+		if(upClaim == 'y')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' != cardsCpu[i].claim)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' == cardsCpu[i].claim)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	//check if they are alive
+	if(question == 'alive')
+	{
+		//find out if user persons alive
+		var upAlive = cpuPerson.alive;
+		
+		console.log('question: ' + question + ' upHouse: ' + upAlive);
+		
+		//if yes then delete all not alive
+		if(upAlive == 'y')
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' != cardsCpu[i].alive)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < cards.length; i++)
+			{
+				//check the cards value
+				if('y' == cardsCpu[i].alive)
+				{
+					console.log("match");
+					cards[i].style.visibility = "hidden";
+				}
+			}
+		}
+	}
+	
+	else 
+	{
+	
+		//find out cpu persons house
+		var cpupHouse = cpuPerson.house;
+		
+		//check if its a house
+		var isHouse = false;
+		
+		console.log("cpuhose: " + cpupHouse + " question: " + question);
+		
+		for(var i =0; i < cards.length; i++)
+		{
+			if(question == cardsCpu[i].house)
+			{
+				isHouse = true;
+			}
+		
+		}
+		console.log(isHouse);
+		//if it is a house then do house stuff
+		if(isHouse)
+		{
+			//if yes then delete all none this house
+			if(cpupHouse == question)
+			{
+				for(var i = 0; i < cards.length; i++)
+				{
+					//check the cards value
+					if(question != cardsCpu[i].house)
+					{
+						console.log("match");
+						cards[i].style.visibility = "hidden";
+					}
+				}
+			}
+			else
+			{
+				for(var i = 0; i < cards.length; i++)
+				{
+					//check the cards value
+					if(question == cardsCpu[i].house)
+					{
+						console.log("match");
+						cards[i].style.visibility = "hidden";
+					}
+				}
+			}
+		}
+		//otherwise do person stuff
+		else
+		{
+		
+			if(cpuPerson.name == question)
+			{
+				console.log("CPU win");
+				//youWin();
+			}
+			else
+			{
+				for(var i = 0; i < cards.length; i++)
+				{
+					//check the cards value
+					if(question == cardsCpu[i].name)
+					{
+						cards[i].style.visibility = "hidden";
+					}
+				}
+			}
+		
+		}		
+	
+	}	
+
+
+
+
+}
+
+function youWin()
+{
+
+
+
+}
+
+//create the cards
+//add attributes to the cards
+//get user cards
+var cardsUser = createCards();
+
+//get user person
+var userPersonIndex = Math.floor((Math.random()*cardsUser.length));
+var userPerson = cardsUser[userPersonIndex];
+
+console.log(userPerson);
+	
+//get cpu cards
+var cardsCpu = createCards();
+
+//get CPU person
+var cpuPersonIndex = Math.floor((Math.random()*cardsCpu.length));
+var cpuPerson = cardsCpu[cpuPersonIndex];
+	
+//display user cards
+addUserBoard(cardsUser);
+	
+//display cpu cards
+addCpuBoard(cardsCpu);
+
+
+//var button = document.getElementById('startButton');
+//button.addEventListener('click', handleClick);
+
+var guessButtonMyth = document.getElementById('guessButtonMyth');
+guessButtonMyth.addEventListener('click', guessMyth);
 
 var guessButtonAppearance = document.getElementById('guessButtonAppearance');
 guessButtonAppearance.addEventListener('click', guessAppearance);
