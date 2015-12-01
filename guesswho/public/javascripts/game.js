@@ -806,6 +806,9 @@ function checkWin()
 	console.log("gues num: " + guessUpdate);
 	guessUpdate = Number(guessUpdate) + 1;
 	pGuess.innerHTML =  "Turns taken: " + guessUpdate;
+	
+	//update score
+	highScore = guessUpdate;
 
 	var cards = document.getElementsByClassName("floating-box");
 	
@@ -864,6 +867,8 @@ function youWin()
 {
 
 	console.log("you a winner");
+	console.log("highScore: " + highScore);
+	
 	window.location.href = '/win';
 
 }
@@ -899,6 +904,9 @@ addUserBoard(cardsUser);
 	
 //display cpu cards
 addCpuBoard(cardsCpu);
+
+//keep track of higghscore
+var highScore = 0;
 
 
 //var button = document.getElementById('startButton');
