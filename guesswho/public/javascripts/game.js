@@ -114,6 +114,11 @@ function addUserBoard(cards)
 	var elems = document.getElementsByClassName("floating-box");
 	
 	elems[6].style.marginLeft = '110px';
+	
+	for(var i = 6; i < elems.length; i++)
+	{
+		elems[i].style.marginTop = '10px';
+	}
 
 }
 
@@ -196,6 +201,7 @@ function guessMyth()
 				if('y' != cardsUser[i].claim)
 				{
 					console.log("match");
+					//cards[i].style['-webkit-animation'] = "fadeout 8s"; 
 					cards[i].style.visibility = "hidden";
 				}
 			}
@@ -208,6 +214,7 @@ function guessMyth()
 				if('y' == cardsUser[i].claim)
 				{
 					console.log("match");
+					//cards[i].style['-webkit-animation'] = "fadeout 8s";
 					cards[i].style.visibility = "hidden";
 				}
 			}
