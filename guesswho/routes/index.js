@@ -39,6 +39,17 @@ router.get('/', function(req, res) {
   res.render('index', { user: req.user });
 });
 
+router.get('/win', function(req, res) {
+  res.render('win', { user: req.user });
+});
+
+router.get('/lose', function(req, res) {
+  res.render('lose', { user: req.user });
+});
+
+router.get('/instructions', function(req, res) {
+  res.render('instructions', { user: req.user });
+});
 
 router.get('/login', function(req, res) {
   res.render('login');

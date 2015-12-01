@@ -284,11 +284,10 @@ function guessMyth()
 		
 	}
 	
-	
 	//check win
+	checkWin();
 	
-	//cpu turn
-	cpuTurn();
+	
 	
 }
 
@@ -441,9 +440,9 @@ function guessAppearance()
 	}
 	
 	//check win
+	checkWin();
 	
-	//cpu turn
-	cpuTurn();
+	
 }
 
 function guessPerson()
@@ -474,9 +473,9 @@ function guessPerson()
 	}
 	
 	//check win
+	checkWin();
 	
-	//cpu turn
-	cpuTurn();
+	
 }
 
 function cpuTurn()
@@ -507,7 +506,7 @@ function cpuTurn()
 	
 	
 	//check if CPU Won
-
+	checkLose();
 }
 
 function handleCpuGuess(question)
@@ -796,10 +795,84 @@ function handleCpuGuess(question)
 
 }
 
+function checkWin()
+{
+
+	//incremet turns taken
+	var pGuess = document.getElementsByTagName('p')[0];
+	console.log("guesses: " + pGuess.textContent);
+	var guessStr =  pGuess.textContent;
+	var guessUpdate = guessStr.substring(guessStr.length - 2, guessStr.length);
+	console.log("gues num: " + guessUpdate);
+	guessUpdate = Number(guessUpdate) + 1;
+	pGuess.innerHTML =  "Turns taken: " + guessUpdate;
+
+	var cards = document.getElementsByClassName("floating-box");
+	
+	//keep track of remaining cards
+	var visibleCards = 0;
+	
+	for(var i = 0; i < cards.length; i++)
+	{
+		//check the cards value
+		if(cards[i].style.visibility != "hidden")
+		{
+			visibleCards++;
+		}
+	}
+
+	//if only one card left than user wins
+	if(visibleCards == 1)
+	{
+		//you win
+		youWin();
+	}
+	else
+	{
+		//cpu turn
+		cpuTurn();
+	}
+
+}
+
+function checkLose()
+{
+	var cards = document.getElementsByClassName("floating-box-cpu");
+	
+	//keep track of remaining cards
+	var visibleCards = 0;
+	
+	for(var i = 0; i < cards.length; i++)
+	{
+		//check the cards value
+		if(cards[i].style.visibility != "hidden")
+		{
+			visibleCards++;
+		}
+	}
+
+	//if only one card left than user loses
+	if(visibleCards == 1)
+	{
+		//you win
+		youLose();
+	}
+
+}
+
 function youWin()
 {
 
+	console.log("you a winner");
+	window.location.href = '/win';
 
+}
+
+function youLose()
+{
+
+	console.log("you a loser");
+	window.location.href = '/lose';
 
 }
 
