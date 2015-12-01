@@ -56,7 +56,14 @@ a {
     /*background-color: #73AD21;*/
     font-size: 0;
     
-    -webkit-animation: fadein 8s; 
+    -webkit-animation:wiggle 2s 2;
+}
+
+@-webkit-keyframes wiggle{
+	0%{-webkit-transform:rotate(3deg);}50%{-webkit-transform:rotate(-3deg);}100%{-webkit-transform:rotate(3deg);}
+}
+@keyframes wiggle{
+	0%{transform:rotate(3deg);}50%{transform:rotate(-3deg);}100%{transform:rotate(3deg);}
 }
 
 @keyframes fadein {
