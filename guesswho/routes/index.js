@@ -77,7 +77,7 @@ router.get('/lose', function(req, res) {
 });
 
 router.get('/instructions', function(req, res) {
-  res.render('instructions', { user: req.user });
+  res.render('instruction');
 });
 
 router.get('/login', function(req, res) {

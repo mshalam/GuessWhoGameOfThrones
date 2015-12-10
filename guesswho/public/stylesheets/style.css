@@ -30,6 +30,11 @@ a {
 
 }
 
+.instruct {
+    margin-top: 250PX;
+    font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 .floating-box {
     display: inline-block;
     width: 80px;
