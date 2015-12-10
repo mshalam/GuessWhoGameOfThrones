@@ -80,6 +80,42 @@ router.get('/instructions', function(req, res) {
   res.render('instruction');
 });
 
+router.get('/api/scores', function(req, res) {
+
+  var movieFilter = {};
+  var searchExists = false;
+  if(req.query.director) {
+    movieFilter.director = req.query.director; 
+    searchExists = true;
+  }
+  
+  console.log("moviefilter: "+movieFilter.director);
+  
+  
+  /*if(movieFilter.director == "best")
+  {
+  		//then show best scores
+  		res.render('instruction', {bestWinStreak: req.user.bestWinStreak});
+  }
+  else if(movieFilter.director == "current")
+  {
+  		//then show current score
+  		res.render('instruction', {currentWinStreak: req.user.currentWinStreak});
+  }
+  else
+  {
+		//show everything  
+		res.render('instruction', {searchExists: searchExists, director: req.query.director, currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak});
+  }
+  */
+  
+  res.render('instruction', {searchExists: searchExists, director: req.query.director, currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak});
+
+  
+
+});
+
+
 router.get('/login', function(req, res) {
   res.render('login');
 });

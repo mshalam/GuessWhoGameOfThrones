@@ -4,14 +4,39 @@
 <p>current win streak {{currentWinStreak}}</p>
 <p>best win streak {{bestWinStreak}}</p>
 
-<p><a href="/guesswho">play again</a></p>
+<p style="margin-bottom: 175px;"><a href="/guesswho">play again</a></p>
 
 
-<p>enter your email to keep updated </p>
 
-<form name="myForm" action="" onsubmit="return validateForm()" >
-email: <input type="text" name="femail">
-<input type="submit" value="Submit">
+<form class="cmxform" id="commentForm" method="get" action="">
+  <fieldset>
+    <legend>Please provide your name, email address (won't be published) and a comment about your experience</legend>
+    <p>
+      <label for="cname">Name (required, at least 2 characters)</label>
+      <input id="cname" name="name" minlength="2" type="text" required>
+    </p>
+    <p>
+      <label for="cemail">E-Mail (required)</label>
+      <input id="cemail" type="email" name="email" required>
+    </p>
+    <p>
+      <label for="curl">URL (optional)</label>
+      <input id="curl" type="url" name="url">
+    </p>
+    <p>
+      <label for="ccomment">Your comment (required)</label>
+      <textarea id="ccomment" name="comment" required></textarea>
+    </p>
+    <p>
+      <input class="submit" type="submit" value="Submit">
+    </p>
+  </fieldset>
 </form>
+<script>
 
-<script src="javascripts/formValidation.js"></script>
+	$(document).ready(function () {
+  		//your code here
+		$("#commentForm").validate();  	
+	});
+
+</script>
