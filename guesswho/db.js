@@ -16,6 +16,6 @@ var User = mongoose.Schema({
 User.plugin(passportLocalMongoose);
 
 mongoose.model('User', User);
-mongoose.connect('mongodb://localhost/guesswhodb');
+mongoose.connect('mongodb://localhost:10521/userdb');
 
 
