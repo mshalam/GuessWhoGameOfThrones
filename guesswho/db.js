@@ -6,7 +6,7 @@ var User = mongoose.Schema({
 	username: String,
 	password: String,
 	currentWinStreak: Number,
-	bestWinStreak: Number
+	bestWinStreak: Number	
 });
 
 

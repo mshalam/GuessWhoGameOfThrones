@@ -35,6 +35,11 @@ a {
     font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.instructPtag {
+	margin-top: 40PX;
+	font: 26px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 .floating-box {
     display: inline-block;
     width: 80px;

@@ -59,9 +59,21 @@ router.get('/win', function(req, res) {
   	req.user.bestWinStreak = req.user.currentWinStreak;
   }
     
-  req.user.save(function(err, saveduser, count) {
-      res.render('win', { currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak });
-    });
+  User.find({}, function(err, users, count){ 
+  
+  	users.sort(function(a,b){
+  		console.log("a best: " + a.bestWinStreak);
+  		console.log("b best: " + b.bestWinStreak);
+  		
+  		return b.bestWinStreak - a.bestWinStreak;
+  		}); 
+  	
+  	console.log("sorted users: " + users);
+  
+ 	 req.user.save(function(err, saveduser, count) {
+ 	     res.render('win', { currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak, users:users });
+ 	   });
+  });	   
   
 });
 
@@ -77,39 +89,53 @@ router.get('/lose', function(req, res) {
 });
 
 router.get('/instructions', function(req, res) {
-  res.render('instruction');
+
+	User.find({}, function(err, users, count){
+	
+		res.render('instruction', {users:users});
+	
+	
+	
+	});
+
+  /*User.find({}, function(err, users, count) {
+  
+  	console.log("users: " + users);
+  
+  
+  	if(req.query.name != null)
+		{    		
+    		users = users.filter(function(element){
+				return element.username == req.query.name;
+			});
+		}
+  
+  
+  	res.render('instruction', {users:users});
+
+  });
+*/
+//  res.render('instruction');
 });
 
 router.get('/api/scores', function(req, res) {
 
-  var movieFilter = {};
-  var searchExists = false;
-  if(req.query.director) {
-    movieFilter.director = req.query.director; 
-    searchExists = true;
-  }
+  User.find({}, function(err, users, count) {
   
-  console.log("moviefilter: "+movieFilter.director);
+  	console.log("users: " + users);
   
   
-  /*if(movieFilter.director == "best")
-  {
-  		//then show best scores
-  		res.render('instruction', {bestWinStreak: req.user.bestWinStreak});
-  }
-  else if(movieFilter.director == "current")
-  {
-  		//then show current score
-  		res.render('instruction', {currentWinStreak: req.user.currentWinStreak});
-  }
-  else
-  {
-		//show everything  
-		res.render('instruction', {searchExists: searchExists, director: req.query.director, currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak});
-  }
-  */
+  	if(req.query.name != null)
+		{    		
+    		users = users.filter(function(element){
+				return element.username == req.query.name;
+			});
+		}
   
-  res.render('instruction', {searchExists: searchExists, director: req.query.director, currentWinStreak: req.user.currentWinStreak, bestWinStreak: req.user.bestWinStreak});
+  	res.send(users);
+  	//res.render('instruction', {users:users});
+
+  });
 
   
 

@@ -6,26 +6,31 @@ document.addEventListener("DOMContentLoaded", function(){
 	btn.addEventListener("click", function(evt){
 		evt.preventDefault();
 		var url = "/api/scores";
-		var director = document.getElementById('director').value;
-		url = url + "?director=" + director;
+		var name = document.getElementById('name').value;
+		url = url + "?name=" + name;
 		var req = new XMLHttpRequest();
 		req.open('GET', url, true);
 		console.log('clicked');
 		req.addEventListener("load", function() {
 			console.log(req.responseText);
 			var tbody = document.createElement('tbody');
-			tbody.id = "movie-list";
-			JSON.parse(req.responseText).forEach(function(movie) {
+			tbody.id = "score-list";
+			JSON.parse(req.responseText).forEach(function(name) {
 				var tr = tbody.appendChild(document.createElement('tr'));
-				tr.appendChild(document.createElement('td')).textContent = movie.title;
-				tr.appendChild(document.createElement('td')).textContent = movie.director;
-				tr.appendChild(document.createElement('td')).textContent = movie.year;
+				tr.appendChild(document.createElement('td')).textContent = name.username;
+				tr.appendChild(document.createElement('td')).textContent = name.currentWinStreak;
+				tr.appendChild(document.createElement('td')).textContent = name.bestWinStreak;
 			});
-			var movieList = document.getElementById('movie-list');
-			//movieList.parentNode.replaceChild(tbody, movieList);
+			var scoreList = document.getElementById('score-list');
+			scoreList.parentNode.replaceChild(tbody, scoreList);
 			console.log(tbody);
 		});
 		req.send();
 	})
 });
+
+
+
+
+
 

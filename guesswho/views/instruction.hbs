@@ -8,8 +8,43 @@
 <p><a href="/guesswho">Click Here</a> to go back to the game</p>
 
 
+<p class="instructPtag"> Check out all the scores below!! (you can filter by username)</p>
+
+<div id="bd">
+
+<form method="get" action="">
+	  username: <input type="text" id="name" name="name"><br>
+	  <input type="submit" id="btn" value="filter">
+	</form>
 
 
+	<table style="width:100%">
+	  <tr>
+    	<th>username</th>
+	    <th>current streak</th> 
+	    <th>best streak</th>
+	  </tr>
+	  
+	  <tbody id="score-list">
+	  {{#each users}}
+	  	<tr>
+    		<td>{{username}}</td>
+	   		 <td>{{currentWinStreak}}</td> 
+	   		 <td>{{bestWinStreak}}</td>
+	  	</tr>
+	  
+	  {{/each}}
+	  </tbody>
+	  
+	</table>
+
+</div>
+
+
+
+
+
+<script src="javascripts/formAjax.js"></script>
 
 
 
