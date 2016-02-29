@@ -26,15 +26,6 @@ var User = new mongoose.Schema({
 
 ```
 
-# Wireframe
-
-![Alt text](https://github.com/nyu-csci-ua-0480-002-fall-2015/mss619-final-project/blob/master/img/wireframe.png?raw=true "Wireframe")
-
-# site map
-
-![Alt text](https://github.com/nyu-csci-ua-0480-002-fall-2015/mss619-final-project/blob/master/img/sitemap.png?raw=true "Wireframe")
-
-
 # Research Topics
 
 * (1 point) Using pre-built Express project templates
